@@ -4,7 +4,9 @@ function StoryList({ id_list }) {
   return (
     <>
       {id_list.map((id) => (
-        <Story id={id} />
+        <>
+          <Story id={id} />
+        </>
       ))}
     </>
   );

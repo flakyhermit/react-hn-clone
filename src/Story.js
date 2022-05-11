@@ -1,24 +1,29 @@
-import useState from 'react'
+import { useState, useEffect } from 'react'
 
 function Story({ id }) {
   const apiURL = `https://hacker-news.firebaseio.com/v0/item/${id}.json`
 
   const [story, setStory] = useState(undefined)
 
-  fetch(apiURL)
-    .then(r => r.jon())
+  useEffect(() => {
+    fetch(apiURL)
+    .then(r => r.json())
     .then(rObj => {
-      alert(rObj)
       setStory(rObj)
     })
+  }, [])
 
   return (
-    <>
-      <h3>{story.title}</h3>
-      <p>{story.by}</p>
-      <p>{story.score}</p>
-      <a href={story.url}/>
-    </>
+    <div>
+      {story !== undefined ?
+        <>
+          <h4>{story.title} (<a href={story.url}>url</a>)</h4>
+          <div>by {story.by}</div>
+          <div>{story.score}</div>
+        </>
+        :
+        <div>Story loading</div>}
+    </div>
   )
 }
 
