@@ -10,7 +10,7 @@ function App() {
     fetch(apiURL)
       .then(r => r.json())
       .then(arr => {
-        setIdList(arr)
+        setIdList(arr.slice(0, 10))
       })
   }, [])
 
